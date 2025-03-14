@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+import GithubIcon from "@/assets/icons/github.svg";
+import LinkIcon from "@/assets/icons/link.svg";
+
+interface Props {
+	project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+---
+
+<article class="border border-gray-200 rounded-lg overflow-hidden h-full hover:shadow-md transition-shadow flex flex-col bg-white">
+	<div class="p-6 flex-grow">
+		<div class="flex items-center gap-2 mb-2">
+			{data.image && <img src={data.image} alt="" class="size-7" />}
+			<h3 class="text-xl font-bold">{data.title}</h3>
+		</div>
+		<p class="text-gray-600 mb-4">{data.description}</p>
+
+		{
+			data.tags && data.tags.length > 0 && (
+				<div class="flex flex-wrap gap-2 mb-4">
+					{data.tags.map((tag) => (
+						<span class="px-2 py-1 text-xs rounded-md bg-gray-100 text-gray-700">{tag}</span>
+					))}
+				</div>
+			)
+		}
+	</div>
+
+	<div class="px-6 pb-6 mt-auto flex flex-wrap gap-2">
+		{
+			data.github && (
+				<a
+					href={data.github}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
+				>
+					<GithubIcon size={16} class="fill-current" />
+					GitHub
+				</a>
+			)
+		}
+
+		{
+			data.website && (
+				<a
+					href={data.website}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors ml-auto"
+				>
+					<LinkIcon size={16} class="stroke-current" />
+					Website
+				</a>
+			)
+		}
+	</div>
+</article>

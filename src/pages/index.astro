@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/Hero.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import PackageCard from '@/components/PackCard.astro';
+import BlogCard from '@/components/BlogCard.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  
+  if (a.data.pubDate && b.data.pubDate) {
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  }
+  return 0;
+});
+
+const packs = (await getCollection('packs')).sort((a, b) => {  
+  if (a.data.pubDate && b.data.pubDate) {
+    return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  }
+  return 0;
+});
+
+const blogs = (await getCollection('blogs', ({ data }) => !(import.meta.env.PROD && data.draft))).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+).slice(0, 3);
+
+---
+
+<Layout title="Arumi's Personal Website" showBackground>
+  <Hero />
+  
+  <section class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold mb-8">Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map(project => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+    
+    {packs.length > 0 && (
+      <h2 class="text-3xl font-bold mt-16 mb-8">Packages</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {packs.map(pack => (
+          <PackageCard pack={pack} />
+        ))}
+      </div>
+    )}
+    
+    {blogs.length > 0 && (
+      <div class="mt-16">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold">Latest Articles</h2>
+          <a href="/blog" class="text-blue-600 hover:text-blue-800 font-semibold">
+            View all →
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {blogs.map((blog) => (<BlogCard blog={blog} />))}
+        </div>
+      </div>
+    )}
+  </section>
+</Layout>

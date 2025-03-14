@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	blog: CollectionEntry<"blogs">;
+}
+
+const { blog } = Astro.props;
+---
+
+<a href={`/blog/${blog.id}`} class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow bg-white">
+	{
+		blog.data.image && (
+			<div class="aspect-video overflow-hidden">
+				<Image src={blog.data.image} alt={blog.data.title} width={600} height={340} class="object-cover w-full h-full" />
+			</div>
+		)
+	}
+	<div class="p-5">
+		<h3 class="text-xl font-semibold mb-2">{blog.data.title}</h3>
+		<p class="text-gray-600 mb-3">{blog.data.description}</p>
+		<time datetime={blog.data.pubDate.toISOString()} class="text-sm text-gray-500">
+			{
+				blog.data.pubDate.toLocaleDateString("en-CA", {
+					year: "numeric",
+					month: "numeric",
+					day: "numeric",
+				})
+			}
+		</time>
+	</div>
+</a>

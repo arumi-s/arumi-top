@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import BlogCard from "@/components/BlogCard.astro";
+
+const blogs = (await getCollection("blogs", ({ data }) => !(import.meta.env.PROD && data.draft))).sort(
+	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+
+<Layout title="Blog | Sakura Arumi">
+	<div class="max-w-6xl mx-auto px-4 py-12">
+		<h1 class="text-4xl font-bold mb-12">Blog</h1>
+
+		{
+			blogs.length === 0 ? (
+				<div class="text-center py-16">
+					<h2 class="text-2xl text-gray-600">No blog posts yet. Check back soon!</h2>
+				</div>
+			) : (
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{blogs.map((blog) => (
+						<BlogCard blog={blog} />
+					))}
+				</div>
+			)
+		}
+	</div>
+</Layout>

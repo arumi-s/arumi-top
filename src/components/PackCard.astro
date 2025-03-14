@@ -1,0 +1,84 @@
+---
+import type { CollectionEntry } from "astro:content";
+import GitHubIcon from "@/assets/icons/github.svg";
+import NpmIcon from "@/assets/icons/npm.svg";
+import GoIcon from "@/assets/icons/go.svg";
+
+interface Props {
+	pack: CollectionEntry<"packs">;
+}
+
+const { pack } = Astro.props;
+const { data } = pack;
+
+const packageType = data.reference ? (data.reference.includes("www.npmjs.com") ? "npm" : data.reference.includes("pkg.go.dev") ? "go" : "") : "";
+---
+
+<article class="border border-gray-200 rounded-lg overflow-hidden h-full hover:shadow-md transition-shadow flex flex-col bg-white">
+	<div class="p-6 flex-grow">
+		<h3 class="text-xl font-bold mb-2">{data.title}</h3>
+		{
+			packageType === "npm" && (
+				<div class="mb-2 flex gap-1 flex-wrap">
+					<img src={data.reference?.replace("https://www.npmjs.com/package/", "https://img.shields.io/npm/v/")} alt="" />
+					<img src={data.reference?.replace("https://www.npmjs.com/package/", "https://img.shields.io/npm/dm/")} alt="" />
+				</div>
+			)
+		}
+		<p class="text-gray-600 mb-4">{data.description}</p>
+
+		{
+			data.tags && data.tags.length > 0 && (
+				<div class="flex flex-wrap gap-2 mb-4">
+					{data.tags.map((tag) => (
+						<span class="px-2 py-1 text-xs rounded-md bg-gray-100 text-gray-700">{tag}</span>
+					))}
+				</div>
+			)
+		}
+	</div>
+
+	<div class="px-6 pb-6 mt-auto flex flex-wrap gap-2">
+		{
+			data.repository && (
+				<a
+					href={data.repository}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
+				>
+					<GitHubIcon size={16} class="fill-current" />
+					Repository
+				</a>
+			)
+		}
+
+		{
+			packageType === "npm" && (
+				<a
+					href={data.reference}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-[#CB3837] text-white hover:bg-red-700 transition-colors ml-auto"
+				>
+					<NpmIcon size={16} class="fill-current" />
+					npm
+				</a>
+			)
+		}
+
+		{
+			packageType === "go" && (
+				<a
+					href={data.reference}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-[#00ADD8] text-white hover:bg-cyan-600 transition-colors ml-auto"
+				>
+					<GoIcon size={16} class="fill-current" />
+					Go
+				</a>
+			)
+		}
+	</div>
+</article>

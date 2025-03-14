@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import GitHubIcon from "@/assets/icons/github.svg";
+import NpmIcon from "@/assets/icons/npm.svg";
+import profile from "../assets/profile.png";
+---
+
+<section class="min-h-[60vh] flex items-center py-16 px-4 max-w-6xl mx-auto">
+	<div class="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+		<div class="md:col-span-8 space-y-6">
+			<h1 class="text-5xl font-bold tracking-tight">
+				Hi, I'm <span class="text-primary-500">Sakura</span>
+				<span class="text-primary-800">Arumi</span>
+			</h1>
+			<p class="text-xl text-gray-700 max-w-2xl">
+				I'm a versatile full stack software engineer with expertise across modern web technologies, backend systems, and AI development.
+			</p>
+			<p class="text-xl max-w-2xl font-bold text-transparent">
+				<span class="bg-gradient-to-r from-orange-600 to-pink-500 bg-clip-text">Never Stops Learning.</span>
+			</p>
+			<div class="flex flex-wrap gap-3 pt-2">
+				<a
+					href="https://github.com/arumi-s"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-5 py-2.5 font-medium text-sm rounded-md bg-gray-900 text-white hover:bg-gray-800 transition-colors"
+				>
+					<GitHubIcon size={20} class="fill-current" />
+					GitHub
+				</a>
+				<a
+					href="https://www.npmjs.com/~arumi-s"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="flex items-center gap-2 px-5 py-2.5 font-medium text-sm rounded-md bg-gray-100 text-gray-900 hover:bg-gray-200 transition-colors"
+				>
+					<NpmIcon size={20} class="fill-current" />
+					npm
+				</a>
+			</div>
+		</div>
+		<div class="md:col-span-4 hidden md:block">
+			<Image src={profile} alt="Sakura Arumi" width={498} height={591} class="size-full" />
+		</div>
+	</div>
+</section>
