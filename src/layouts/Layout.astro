@@ -28,7 +28,7 @@ const { title, description = "Arumi's personal website - A full stack software e
 	<body>
 		<div class="min-h-screen flex flex-col bg-white text-gray-900 bg-no-repeat bg-top" style={showBackground ? `background-image: url(${wave.src});` : ""}>
 			<Header />
-			<main class="flex-grow">
+			<main class="grow">
 				<slot />
 			</main>
 			<Footer />

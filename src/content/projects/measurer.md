@@ -5,5 +5,5 @@ github: "https://github.com/arumi-s/image-measurer"
 website: "https://measure.arumi.top"
 tags: ["Image Measurement", "Image Annotation"]
 image: "https://measure.arumi.top/favicon.svg"
-featured: true
+featured: false
 ---

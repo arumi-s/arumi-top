@@ -15,7 +15,7 @@ const packageType = data.reference ? (data.reference.includes("www.npmjs.com") ?
 ---
 
 <article class="border border-gray-200 rounded-lg overflow-hidden h-full hover:shadow-md transition-shadow flex flex-col bg-white">
-	<div class="p-6 flex-grow">
+	<div class="p-6 grow">
 		<h3 class="text-xl font-bold mb-2">{data.title}</h3>
 		{
 			packageType === "npm" && (
@@ -47,7 +47,7 @@ const packageType = data.reference ? (data.reference.includes("www.npmjs.com") ?
 					rel="noopener noreferrer"
 					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
 				>
-					<GitHubIcon size={16} class="fill-current" />
+					<GitHubIcon width={16} height={16} class="fill-current" />
 					Repository
 				</a>
 			)
@@ -61,7 +61,7 @@ const packageType = data.reference ? (data.reference.includes("www.npmjs.com") ?
 					rel="noopener noreferrer"
 					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-[#CB3837] text-white hover:bg-red-700 transition-colors ml-auto"
 				>
-					<NpmIcon size={16} class="fill-current" />
+					<NpmIcon width={16} height={16} class="fill-current" />
 					npm
 				</a>
 			)
@@ -75,7 +75,7 @@ const packageType = data.reference ? (data.reference.includes("www.npmjs.com") ?
 					rel="noopener noreferrer"
 					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-[#00ADD8] text-white hover:bg-cyan-600 transition-colors ml-auto"
 				>
-					<GoIcon size={16} class="fill-current" />
+					<GoIcon width={16} height={16} class="fill-current" />
 					Go
 				</a>
 			)

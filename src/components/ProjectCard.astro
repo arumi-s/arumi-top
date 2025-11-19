@@ -12,9 +12,9 @@ const { data } = project;
 ---
 
 <article class="border border-gray-200 rounded-lg overflow-hidden h-full hover:shadow-md transition-shadow flex flex-col bg-white">
-	<div class="p-6 flex-grow">
+	<div class="p-6 grow">
 		<div class="flex items-center gap-2 mb-2">
-			{data.image && <img src={data.image} alt="" class="size-7" />}
+			{data.image && <img src={data.image} alt="" class="size-7 object-contain" />}
 			<h3 class="text-xl font-bold">{data.title}</h3>
 		</div>
 		<p class="text-gray-600 mb-4">{data.description}</p>
@@ -39,7 +39,7 @@ const { data } = project;
 					rel="noopener noreferrer"
 					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
 				>
-					<GithubIcon size={16} class="fill-current" />
+					<GithubIcon width={16} height={16} class="fill-current" />
 					GitHub
 				</a>
 			)
@@ -53,7 +53,7 @@ const { data } = project;
 					rel="noopener noreferrer"
 					class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-blue-600 text-white hover:bg-blue-700 transition-colors ml-auto"
 				>
-					<LinkIcon size={16} class="stroke-current" />
+					<LinkIcon width={16} height={16} class="stroke-current" />
 					Website
 				</a>
 			)

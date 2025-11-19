@@ -10,7 +10,4 @@ export default defineConfig({
 	},
 	site: "https://arumi.top",
 	adapter: vercel(),
-	experimental: {
-		svg: true,
-	},
 });
